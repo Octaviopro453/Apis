@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APIs</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: rgba(36, 41, 46, 0.9); /* Fondo oscuro semi-transparente */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      animation: fadeIn 0.5s ease; /* Animación de entrada al cargar la página */
+    }
+
+    .container {
+      position: relative; /* Contenedor relativo para posicionamiento absoluto */
+      text-align: center;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px; /* Bordes redondeados más suaves */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+      width: 90%; /* Aumento del ancho del contenedor */
+      max-width: 700px; /* Aumento del ancho máximo */
+      margin-top: 50px;
+      animation: slideInUp 0.5s ease; /* Animación de entrada para el contenedor */
+    }
+
+    .icon-container {
+      position: absolute;
+      top: 10px; /* Distancia desde la parte superior */
+      left: 10px; /* Distancia desde la derecha */
+    }
+
+    h1 {
+      color: #343a40; /* Color de texto oscuro */
+      margin-bottom: 20px;
+      font-size: 24px; /* Tamaño de fuente aumentado */
+    }
+
+    button {
+      margin: 10px;
+      padding: 14px 28px; /* Aumento del relleno del botón */
+      font-size: 18px; /* Tamaño de fuente aumentado */
+      cursor: pointer;
+      background-color: #007bff; /* Azul brillante */
+      color: #fff;
+      border: none;
+      border-radius: 8px; /* Bordes redondeados */
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+    }
+
+    button:hover {
+      background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
+      transform: translateY(-3px); /* Ajuste menor en la elevación */
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    #apiButtons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    #apiButtons button {
+      margin: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+      
+      button {
+        padding: 12px 24px; /* Relleno reducido para dispositivos móviles */
+        font-size: 16px; /* Tamaño de fuente reducido para dispositivos móviles */
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+  <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="icon-container">
+      <a href="https://edgabot.akiomae.com/AkioUsers/Angel/Menu.html" style="text-decoration: none; color: inherit;">
+        <i class="fas fa-arrow-left"></i> <!-- Icono de flecha -->
+      </a>
+    </div>
+    <h1>Pelicular APIs</h1>
+    <div id="apiButtons">
+      <!-- Aquí se generarán dinámicamente los botones -->
+    </div>
+  </div>
+
+  <script>
+    // Definición de las APIs disponibles (ejemplo)
+    const apis = [
+      {
+        name: 'Traductor',
+        url: 'https://edgabot.akiomae.com/AkioUsers/OctavioYT/traductor.php?language=en&msg=Hola, mundo'
+      },
+      {
+        name: 'Captchas',
+        url: 'https://edgabot.akiomae.com/AkioUsers/OctavioYT/captcha.php?key='
+      },
+      {
+        name: 'Gráficas',
+        url: 'https://edgabot.akiomae.com/AkioUsers/OctavioYT/grafic.php?type=bar&amount=2&label1=Hola&label2=Adios&dato1=57&dato2=75'
+      },
+    ];
+
+    // Función para crear botones dinámicamente
+    function createApiButtons() {
+      const apiButtonsDiv = document.getElementById('apiButtons');
+      
+      apis.forEach(api => {
+        const button = document.createElement('button');
+        button.textContent = api.name;
+        button.addEventListener('click', () => {
+          window.open(api.url, '_blank'); // Abre la URL en una nueva pestaña
+        });
+        apiButtonsDiv.appendChild(button);
+      });
+    }
+
+    // Cargar los botones al cargar la página
+    window.onload = function() {
+      createApiButtons();
+    };
+
+  </script>
+</body>
+</html>
