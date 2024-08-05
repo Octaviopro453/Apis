@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>APIs</title>
   <style>
-    
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: rgba(36, 41, 46, 0.9); /* Fondo oscuro semi-transparente */
@@ -74,6 +73,45 @@
       margin: 10px;
     }
 
+    .modal {
+      display: none; /* Ocultar por defecto */
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4);
+      animation: fadeIn 0.5s ease; /* Animación de entrada */
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto; /* 15% desde la parte superior y centrado */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 12px; /* Bordes redondeados */
+      animation: slideInUp 0.5s ease; /* Animación de entrada */
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
     @media (max-width: 600px) {
       .container {
         padding: 20px;
@@ -120,21 +158,140 @@
     </div>
   </div>
 
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="apiName"></h2>
+      <p id="apiDescription"></p>
+      <h3>URL</h3>
+      <p id="apiUrl"></p>
+      <h3>Ejemplos</h3>
+      <pre id="apiExamples"></pre>
+    </div>
+  </div>
+
   <script>
     // Definición de las APIs disponibles (ejemplo)
     const apis = [
       {
         name: 'Traductor',
-        url: 'https://edgabot.akiomae.com/AkioUsers/OctavioYT/traductor.php?language=en&msg=Hola, mundo'
+        url: 'https://edgabot.akiomae.com/AkioUsers/OctavioYT/traductor.php?language=en&msg=Hola, mundo',
+        description: 'Esta API traduce un mensaje al idioma especificado. Se requiere el idioma de destino y el mensaje a traducir.',
+        examples: `
+Fetch (JavaScript):
+fetch('https://edgabot.akiomae.com/AkioUsers/OctavioYT/traductor.php?language=en&msg=Hola, mundo')
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+Python:
+import requests
+
+response = requests.get('https://edgabot.akiomae.com/AkioUsers/OctavioYT/traductor.php?language=en&msg=Hola, mundo')
+print(response.json());
+
+BDFD:
+$httpGet[https://edgabot.akiomae.com/AkioUsers/OctavioYT/traductor.php?language=en&msg=Hola, mundo]
+$httpResult
+        `
       },
       {
         name: 'Captchas',
-        url: 'https://edgabot.akiomae.com/AkioUsers/OctavioYT/captcha.php?key='
+        url: 'https://edgabot.akiomae.com/AkioUsers/OctavioYT/captcha.php?key=',
+        description: 'Esta API genera un captcha basado en la clave proporcionada.',
+        examples: `
+Fetch (JavaScript):
+fetch('https://edgabot.akiomae.com/AkioUsers/OctavioYT/captcha.php?key=your_key_here')
+  .then(response => response.blob())
+  .then(image => {
+    const imgURL = URL.createObjectURL(image);
+    document.getElementById('captchaImage').src = imgURL;
+  });
+
+Python:
+import requests
+
+response = requests.get('https://edgabot.akiomae.com/AkioUsers/OctavioYT/captcha.php?key=your_key_here')
+with open('captcha.png', 'wb') as f:
+    f.write(response.content)
+
+BDFD:
+$httpGet[https://edgabot.akiomae.com/AkioUsers/OctavioYT/captcha.php?key=your_key_here]
+$httpResult
+        `
       },
       {
         name: 'Gráficas',
-        url: 'https://edgabot.akiomae.com/AkioUsers/OctavioYT/grafic.php?type=bar&amount=2&label1=Hola&label2=Adios&dato1=57&dato2=75'
+        url: 'https://edgabot.akiomae.com/AkioUsers/OctavioYT/grafic.php?type=bar&amount=2&label1=Hola&label2=Adios&dato1=57&dato2=75',
+        description: 'Esta API genera gráficas basadas en los datos proporcionados. Se requiere el tipo de gráfica, la cantidad de datos, etiquetas y valores.',
+        examples: `
+Fetch (JavaScript):
+fetch('https://edgabot.akiomae.com/AkioUsers/OctavioYT/grafic.php', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    type: 'bar',
+    amount: 2,
+    title: 'Gráficas',
+    label1: 'Hola',
+    dato1: 57,
+    label2: 'Adios',
+    dato2: 75
+  })
+})
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+Python:
+import requests
+
+response = requests.post('https://edgabot.akiomae.com/AkioUsers/OctavioYT/grafic.php', json={
+    'type': 'bar',
+    'amount': 2,
+    'title': 'Gráficas',
+    'label1': 'Hola',
+    'dato1': 57,
+    'label2': 'Adios',
+    'dato2': 75
+})
+print(response.json());
+
+BDFD:
+$httpPost[https://edgabot.akiomae.com/AkioUsers/OctavioYT/grafic.php;{
+  "type": "bar/pie/line",
+  "amount": 2,
+  "title": "Gráficas",
+  "label1": "Texto 1",
+  "dato1": 0,
+  "label2": "Texto 2",
+  "dato2": 0
+}]
+$httpResult
+        `
       },
+      {
+        name: 'Memes',
+        url: 'https://edgabot.akiomae.com/OctavioYT/Memes.php',
+        description: 'Esta API proporciona memes aleatorios.',
+        examples: `
+Fetch (JavaScript):
+fetch('https://edgabot.akiomae.com/OctavioYT/Memes.php')
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+Python:
+import requests
+
+response = requests.get('https://edgabot.akiomae.com/OctavioYT/Memes.php')
+print(response.json());
+
+BDFD:
+$httpGet[https://edgabot.akiomae.com/OctavioYT/Memes.php]
+$httpResult
+        `
+      }
     ];
 
     // Función para crear botones dinámicamente
@@ -145,16 +302,37 @@
         const button = document.createElement('button');
         button.textContent = api.name;
         button.addEventListener('click', () => {
-          window.open(api.url, '_blank'); // Abre la URL en una nueva pestaña
+          openModal(api);
         });
         apiButtonsDiv.appendChild(button);
       });
+    }
+
+    // Función para abrir el modal y cargar la información de la API
+    function openModal(api) {
+      document.getElementById('apiName').textContent = api.name;
+      document.getElementById('apiDescription').textContent = api.description;
+      document.getElementById('apiUrl').textContent = api.url;
+      document.getElementById('apiExamples').textContent = api.examples;
+      document.getElementById('myModal').style.display = "block";
     }
 
     // Cargar los botones al cargar la página
     window.onload = function() {
       createApiButtons();
     };
+
+    // Cerrar el modal
+    document.querySelector('.close').onclick = function() {
+      document.getElementById('myModal').style.display = "none";
+    }
+
+    // Cerrar el modal si el usuario hace clic fuera de él
+    window.onclick = function(event) {
+      if (event.target == document.getElementById('myModal')) {
+        document.getElementById('myModal').style.display = "none";
+      }
+    }
 
   </script>
 </body>
