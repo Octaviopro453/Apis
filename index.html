@@ -154,6 +154,11 @@
     </div>
     <h1>Pelicular APIs</h1>
     <div id="apiButtons">
+      <button id="traductorButton">Traductor</button>
+      <button id="captchasButton">Captchas</button>
+      <button id="graficasButton">Gráficas</button>
+      <button id="memesButton">Memes</button>
+      <button id="emojiButton">Emoji</button>
     </div>
   </div>
 
@@ -271,7 +276,7 @@ $httpResult
       {
         name: 'Memes',
         url: 'https://edgabot.akiomae.com/OctavioYT/Memes.php',
-        description: 'Esta API proporciona memes aleatorios.',
+        description: 'Esta API genera memes.',
         examples: `
 Fetch (JavaScript):
 fetch('https://edgabot.akiomae.com/OctavioYT/Memes.php')
@@ -323,7 +328,7 @@ BDFD:
 $httpPost[https://edgabot.akiomae.com/AkioUsers/OctavioYT/Get_emoji.php;{
   "token": "$getVar[token]",
   "server": "$guildID",
-  "emoji": "name or id"
+  "emoji": "$var[emoji]"
 }]
 $title[Emoji]
 $description[
@@ -331,7 +336,7 @@ $if[$httpResult[error]==]
 emoji obtenido
 $else
 :x: Un error inesperado ha ocurrido, error:
-```$httpResult[error]```
+$httpResult[error]
 $endif
 ]
 $image[$httpResult[url]]
