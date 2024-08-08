@@ -7,56 +7,56 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: rgba(36, 41, 46, 0.9); /* Fondo oscuro semi-transparente */
+      background-color: rgba(36, 41, 46, 0.9);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
-      animation: fadeIn 0.5s ease; /* Animación de entrada al cargar la página */
+      animation: fadeIn 0.5s ease;
     }
 
     .container {
-      position: relative; /* Contenedor relativo para posicionamiento absoluto */
+      position: relative;
       text-align: center;
       background-color: #fff;
       padding: 30px;
-      border-radius: 12px; /* Bordes redondeados más suaves */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra más suave */
-      width: 90%; /* Aumento del ancho del contenedor */
-      max-width: 700px; /* Aumento del ancho máximo */
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 700px;
       margin-top: 50px;
-      animation: slideInUp 0.5s ease; /* Animación de entrada para el contenedor */
+      animation: slideInUp 0.5s ease;
     }
 
     .icon-container {
       position: absolute;
-      top: 10px; /* Distancia desde la parte superior */
-      left: 10px; /* Distancia desde la derecha */
+      top: 10px;
+      left: 10px;
     }
 
     h1 {
-      color: #343a40; /* Color de texto oscuro */
+      color: #343a40;
       margin-bottom: 20px;
-      font-size: 24px; /* Tamaño de fuente aumentado */
+      font-size: 24px;
     }
 
     button {
       margin: 10px;
-      padding: 14px 28px; /* Aumento del relleno del botón */
-      font-size: 18px; /* Tamaño de fuente aumentado */
+      padding: 14px 28px;
+      font-size: 18px;
       cursor: pointer;
-      background-color: #007bff; /* Azul brillante */
+      background-color: #007bff;
       color: #fff;
       border: none;
-      border-radius: 8px; /* Bordes redondeados */
+      border-radius: 8px;
       transition: background-color 0.3s ease, transform 0.2s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     button:hover {
-      background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
-      transform: translateY(-3px); /* Ajuste menor en la elevación */
+      background-color: #0056b3;
+      transform: translateY(-3px);
     }
 
     button:focus {
@@ -74,7 +74,7 @@
     }
 
     .modal {
-      display: none; /* Ocultar por defecto */
+      display: none;
       position: fixed;
       z-index: 1;
       left: 0;
@@ -84,18 +84,18 @@
       overflow: auto;
       background-color: rgb(0,0,0);
       background-color: rgba(0,0,0,0.4);
-      animation: fadeIn 0.5s ease; /* Animación de entrada */
+      animation: fadeIn 0.5s ease;
     }
 
     .modal-content {
       background-color: #fefefe;
-      margin: 15% auto; /* 15% desde la parte superior y centrado */
+      margin: 15% auto;
       padding: 20px;
       border: 1px solid #888;
       width: 80%;
       max-width: 600px;
-      border-radius: 12px; /* Bordes redondeados */
-      animation: slideInUp 0.5s ease; /* Animación de entrada */
+      border-radius: 12px;
+      animation: slideInUp 0.5s ease;
     }
 
     .close {
@@ -118,8 +118,8 @@
       }
       
       button {
-        padding: 12px 24px; /* Relleno reducido para dispositivos móviles */
-        font-size: 16px; /* Tamaño de fuente reducido para dispositivos móviles */
+        padding: 12px 24px;
+        font-size: 16px;
       }
     }
 
@@ -149,16 +149,14 @@
   <div class="container">
     <div class="icon-container">
       <a href="https://edgabot.akiomae.com/AkioUsers/Angel/Menu.html" style="text-decoration: none; color: inherit;">
-        <i class="fas fa-arrow-left"></i> <!-- Icono de flecha -->
+        <i class="fas fa-arrow-left"></i>
       </a>
     </div>
     <h1>Pelicular APIs</h1>
     <div id="apiButtons">
-      <!-- Aquí se generarán dinámicamente los botones -->
     </div>
   </div>
 
-  <!-- Modal -->
   <div id="myModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -172,7 +170,6 @@
   </div>
 
   <script>
-    // Definición de las APIs disponibles (ejemplo)
     const apis = [
       {
         name: 'Traductor',
@@ -291,10 +288,57 @@ BDFD:
 $httpGet[https://edgabot.akiomae.com/OctavioYT/Memes.php]
 $httpResult
         `
+      },
+      {
+        name: 'Emoji',
+        url: 'https://edgabot.akiomae.com/AkioUsers/OctavioYT/Get_emoji.php',
+        description: 'Esta API obtiene un emoji basado en el servidor y el token proporcionados.',
+        examples: `
+Fetch (JavaScript):
+fetch('https://edgabot.akiomae.com/AkioUsers/OctavioYT/Get_emoji.php', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    token: 'your_token_here',
+    server: 'your_server_id_here',
+    emoji: 'emoji_name_here'
+  })
+})
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+Python:
+import requests
+
+response = requests.post('https://edgabot.akiomae.com/AkioUsers/OctavioYT/Get_emoji.php', json={
+    token: 'your_token_here',
+    server: 'your_server_id_here',
+    emoji: 'emoji_name_here'
+})
+print(response.json());
+
+BDFD:
+$httpPost[https://edgabot.akiomae.com/AkioUsers/OctavioYT/Get_emoji.php;{
+  "token": "$getVar[token]",
+  "server": "$guildID",
+  "emoji": "name or id"
+}]
+$title[Emoji]
+$description[
+$if[$httpResult[error]==]
+emoji obtenido
+$else
+:x: Un error inesperado ha ocurrido, error:
+```$httpResult[error]```
+$endif
+]
+$image[$httpResult[url]]
+        `
       }
     ];
 
-    // Función para crear botones dinámicamente
     function createApiButtons() {
       const apiButtonsDiv = document.getElementById('apiButtons');
       
@@ -308,7 +352,6 @@ $httpResult
       });
     }
 
-    // Función para abrir el modal y cargar la información de la API
     function openModal(api) {
       document.getElementById('apiName').textContent = api.name;
       document.getElementById('apiDescription').textContent = api.description;
@@ -317,23 +360,19 @@ $httpResult
       document.getElementById('myModal').style.display = "block";
     }
 
-    // Cargar los botones al cargar la página
     window.onload = function() {
       createApiButtons();
     };
 
-    // Cerrar el modal
     document.querySelector('.close').onclick = function() {
       document.getElementById('myModal').style.display = "none";
     }
 
-    // Cerrar el modal si el usuario hace clic fuera de él
     window.onclick = function(event) {
       if (event.target == document.getElementById('myModal')) {
         document.getElementById('myModal').style.display = "none";
       }
     }
-
   </script>
 </body>
 </html>
